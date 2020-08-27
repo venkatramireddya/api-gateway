@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: api-gateway
+  profiles:    active: development
+    include: development
+
+management:  endpoints:    web:      exposure:        include: '*'
+---
+spring:  servlet:    multipart:      max-file-size: 10000MB      max-request-size: 10000MB
+
+server:  port: 8001
+---
+spring:  profiles: development
+
+# with out Netflex Eureka Server
+#  cloud:
+#    gateway:
+#      httpclient:
+#        connect-timeout: 3000
+#        response-timeout: 30s
+#      routes:
+#      - id: path_route
+#        uri: http://localhost:9001/
+#        predicates:
+#        - Path=/user-gateway/**
+#        
+#      - id: path_route
+#        uri: http://localhost:8080/
+#        predicates:
+#        - Path=/login-gateway/**
+
+# with Netflex Eureka Server
+  cloud:
+    gateway:
+      #httpclient:        #connect-timeout: 3
+        #response-timeout: 3
+      routes:
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+        - Path=/user-gateway/**
+      - id: login-service
+        uri: lb://login-service
+        predicates:
+        - Path=/login-gateway/**      
+debug:  true
