@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="3 seconds">
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+	<springProperty scope="context" name= "appName" source="spring.application.name"/>
+	<property name="app.name" value="event-service" />
+	<property name="pattern.default" value="%d %-5level [${appName} %X{traceId:-} %X{spanId:-} %X{spanExportable}] %X{x-correlation-id}	%X{Request-Id}	 ${PID} --- [  %thread]  %logger{36} : %msg %n" />
+	<property name="log.location" value="/apps/opt/tanvi/logs" />
+	
+	<appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.location}/${app.name}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${log.location}/${app.name}.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<maxHistory>7</maxHistory>
+        </rollingPolicy>
+		<encoder>
+			<Pattern>${pattern.default}</Pattern>
+		</encoder>
+	</appender>
+
+	<jmxConfigurator />
+	<root level="INFO">
+		<appender-ref ref="LOGFILE" />
+	</root>
+
+    <logger name="org.hibernate.SQL" level="INFO" />
+    <logger name="org.hibernate.type" level="INFO" />
+    <logger name="org.hibernate.search" level="INFO" />
+	<logger name="com.github.swrirobotics" level="DEBUG" />
+	<logger name="com.github.swrirobotics.bags.reader.messages.serialization" level="INFO"/>
+	<logger name="org.springframework" level="INFO" />
+	<logger name="org.springframework.session" level="INFO"/>
+	<logger name="org.springframework.web.socket" level="INFO"/>
+</configuration>
