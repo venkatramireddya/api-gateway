@@ -3,12 +3,16 @@ spring:
     name: api-gateway
   profiles:    active: development
     include: development
-
+  servlet:
+    multipart:
+      max-file-size: 10000MB
+      max-request-size: 10000MB
+      
 management:  endpoints:    web:      exposure:        include: '*'
----
-spring:  servlet:    multipart:      max-file-size: 10000MB      max-request-size: 10000MB
 
 server:  port: 8001
+  
+logging:  level:    web: DEBUG
 ---
 spring:  profiles: development
 
@@ -29,10 +33,6 @@ spring:  profiles: development
         predicates:
         - Path=/login-gateway/**
         
-      - id: path_route
-        uri: http://localhost:8000/
-        predicates:
-        - Path=/*/**
 
 # with Netflex Eureka Server
 #  cloud:
