@@ -18,6 +18,10 @@ logging:  level:    web: DEBUG
 eureka:
   client:
     enabled: false
+    
+---
+#Directly Connecting Admin Server
+spring:  boot:    admin:      client:        url: http://localhost:9000
 ---
 spring:  profiles: development
 
