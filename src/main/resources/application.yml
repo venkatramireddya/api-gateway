@@ -13,6 +13,11 @@ management:  endpoints:    web:      exposure:        include: '*'
 server:  port: 8001
   
 logging:  level:    web: DEBUG
+ 
+#Disable Eureka client temparatly . it work inside application.yml only, not bootstrap.yml
+eureka:
+  client:
+    enabled: false
 ---
 spring:  profiles: development
 

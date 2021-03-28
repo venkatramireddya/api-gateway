@@ -16,6 +16,3 @@ eureka:
 spring:
   profiles: local
 
-eureka:
-  client:
-    enabled: false
