@@ -38,9 +38,9 @@ spring:  profiles: development
         - Path=/user-gateway/**
         
       - id: path_route
-        uri: http://localhost:8080/
+        uri: http://localhost:9002/
         predicates:
-        - Path=/login-gateway/**
+        - Path=/event-gateway/**
         
 
 # with Netflex Eureka Server
