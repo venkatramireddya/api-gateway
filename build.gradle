@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.4.4'
+	id 'org.springframework.boot' version '2.5.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
@@ -13,7 +13,7 @@ repositories {
 }
 
 ext {
-	set('springCloudVersion', "2020.0.2")
+	set('springCloudVersion', "2020.0.3")
 }
 
 dependencies {
@@ -27,9 +27,7 @@ dependencies {
 	
 	
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
 dependencyManagement {
